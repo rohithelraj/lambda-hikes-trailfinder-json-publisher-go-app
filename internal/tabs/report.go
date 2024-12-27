@@ -49,17 +49,52 @@ func NewReportTab(window fyne.Window) *container.TabItem {
 
 	// Toolbar with supported formatting
 	toolbar := widget.NewToolbar(
-		widget.NewToolbarAction(theme.DocumentCreateIcon(), func() {
+		widget.NewToolbarAction(theme.GridIcon(), func() {
 			currentText := descriptionEntry.Text
-			descriptionEntry.SetText(currentText + "**bold**")
+			cursorPos := descriptionEntry.CursorColumn
+			newText := currentText[:cursorPos] + "**bold**" + currentText[cursorPos:]
+			descriptionEntry.SetText(newText)
+			descriptionEntry.CursorColumn = cursorPos + 6
 		}),
-		widget.NewToolbarAction(theme.DocumentIcon(), func() {
+		widget.NewToolbarAction(theme.MenuIcon(), func() {
 			currentText := descriptionEntry.Text
-			descriptionEntry.SetText(currentText + "*italic*")
+			cursorPos := descriptionEntry.CursorColumn
+			newText := currentText[:cursorPos] + "*italic*" + currentText[cursorPos:]
+			descriptionEntry.SetText(newText)
+			descriptionEntry.CursorColumn = cursorPos + 6
 		}),
-		widget.NewToolbarAction(theme.DocumentIcon(), func() {
+		widget.NewToolbarAction(theme.ListIcon(), func() {
 			currentText := descriptionEntry.Text
-			descriptionEntry.SetText(currentText + "# Heading")
+			cursorPos := descriptionEntry.CursorColumn
+			newText := currentText[:cursorPos] + "# Heading" + currentText[cursorPos:]
+			descriptionEntry.SetText(newText)
+			descriptionEntry.CursorColumn = cursorPos + 9
+		}),
+		widget.NewToolbarAction(theme.MailAttachmentIcon(), func() {
+			currentText := descriptionEntry.Text
+			cursorPos := descriptionEntry.CursorColumn
+
+			linkTextEntry := widget.NewEntry()
+			linkURLEntry := widget.NewEntry()
+
+			linkTextEntry.SetPlaceHolder("Link text")
+			linkURLEntry.SetPlaceHolder("URL")
+
+			content := container.NewVBox(
+				widget.NewLabel("Link Text:"),
+				linkTextEntry,
+				widget.NewLabel("URL:"),
+				linkURLEntry,
+			)
+
+			dialog.ShowCustomConfirm("Insert Link", "Insert", "Cancel", content, func(insert bool) {
+				if insert && linkTextEntry.Text != "" && linkURLEntry.Text != "" {
+					linkMD := fmt.Sprintf("[%s](%s)", linkTextEntry.Text, linkURLEntry.Text)
+					newText := currentText[:cursorPos] + linkMD + currentText[cursorPos:]
+					descriptionEntry.SetText(newText)
+					descriptionEntry.CursorColumn = cursorPos + len(linkMD)
+				}
+			}, window)
 		}),
 	)
 

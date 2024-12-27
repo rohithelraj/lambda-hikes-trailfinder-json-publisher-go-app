@@ -39,13 +39,11 @@ func NewEventTab(window fyne.Window) *container.TabItem {
 	// Rich text fields with toolbar
 	createRichTextArea := func(label string) (*widget.RichText, *widget.Entry, *widget.Toolbar) {
 		richText := widget.NewRichText()
-		// Set a fixed height for the rich text display
 		richText.Resize(fyne.NewSize(0, 150))
 		richText.Wrapping = fyne.TextWrapWord
 		binding := binding.NewString()
 		entry := widget.NewMultiLineEntry()
 		entry.Wrapping = fyne.TextWrapWord
-		// Set a fixed height for the entry
 		entry.Resize(fyne.NewSize(0, 100))
 		entry.OnChanged = func(text string) {
 			richText.ParseMarkdown(text)
@@ -53,17 +51,49 @@ func NewEventTab(window fyne.Window) *container.TabItem {
 		}
 
 		toolbar := widget.NewToolbar(
-			widget.NewToolbarAction(theme.DocumentCreateIcon(), func() {
+			widget.NewToolbarAction(theme.GridIcon(), func() {
 				currentText := entry.Text
-				entry.SetText(currentText + "**bold**")
+				cursorPos := entry.CursorColumn
+				newText := currentText[:cursorPos] + "**bold**" + currentText[cursorPos:]
+				entry.SetText(newText)
+				entry.CursorColumn = cursorPos + 6
 			}),
-			widget.NewToolbarAction(theme.DocumentIcon(), func() {
+			widget.NewToolbarAction(theme.MenuIcon(), func() {
 				currentText := entry.Text
-				entry.SetText(currentText + "*italic*")
+				cursorPos := entry.CursorColumn
+				newText := currentText[:cursorPos] + "*italic*" + currentText[cursorPos:]
+				entry.SetText(newText)
+				entry.CursorColumn = cursorPos + 6
 			}),
-			widget.NewToolbarAction(theme.DocumentIcon(), func() {
+			widget.NewToolbarAction(theme.ListIcon(), func() {
 				currentText := entry.Text
-				entry.SetText(currentText + "# Heading")
+				cursorPos := entry.CursorColumn
+				newText := currentText[:cursorPos] + "# Heading" + currentText[cursorPos:]
+				entry.SetText(newText)
+				entry.CursorColumn = cursorPos + 9
+			}),
+			widget.NewToolbarAction(theme.MailAttachmentIcon(), func() {
+				currentText := entry.Text
+				cursorPos := entry.CursorColumn
+
+				linkTextEntry := widget.NewEntry()
+				linkURLEntry := widget.NewEntry()
+				linkTextEntry.SetPlaceHolder("Link text")
+				linkURLEntry.SetPlaceHolder("URL")
+
+				content := container.NewVBox(
+					widget.NewLabel("Link Text:"), linkTextEntry,
+					widget.NewLabel("URL:"), linkURLEntry,
+				)
+
+				dialog.ShowCustomConfirm("Insert Link", "Insert", "Cancel", content, func(insert bool) {
+					if insert && linkTextEntry.Text != "" && linkURLEntry.Text != "" {
+						linkMD := fmt.Sprintf("[%s](%s)", linkTextEntry.Text, linkURLEntry.Text)
+						newText := currentText[:cursorPos] + linkMD + currentText[cursorPos:]
+						entry.SetText(newText)
+						entry.CursorColumn = cursorPos + len(linkMD)
+					}
+				}, window)
 			}),
 		)
 
