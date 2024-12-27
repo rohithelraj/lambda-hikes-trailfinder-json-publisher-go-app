@@ -1,0 +1,34 @@
+{
+  "Accommodation": "1. Erdickalia\n2. Kordickalia",
+  "Costs": "No trip to Sardinia is complete without a walk through the maquis, with\nits sweet-smelling carpet of scented flora. You’ll find this typical\nMediterranean vegetation in coastal and mountainous regions, including\nGennargentu National Park and the island of San Pietro. Visit in spring,\nwhen the aroma is at its strongest.",
+  "CreationDate": "2024-12-27",
+  "Description": "Speckled with caves, subterranean Sardinia is a magical realm of\nshimmering limestone formations. The most enchanting of all is the vast\nGrotta di Nettuno (see Capo Caccia), which encases the crystal-clear\nwaters of Lake Marmora – once home to monk seals. You can explore this\natmospheric space on foot, along illuminated walkways, or experience a\nseal’s-eye view of its depths on a diving excursion.",
+  "EntryType": "Trip",
+  "Equipment": "Sardinia’s highest and most magnificent sea stack is Pan di Zucchero (Sugarloaf).\nRising out of the bright blue sea, this dramatically steep limestone rock is only a\nfew hundred metres from the shore.",
+  "MainImagePath": "https://hikes-trailfinder-website-images.s3.us-east-1.amazonaws.com/Trip-01/main.webp",
+  "RelatedEvents": [
+    {
+      "Description": "Capture it from the cove of Masua at sunset,\nwhen it almost appears to glow",
+      "Name": "Hike in Lombachertal",
+      "URL": "tripLinkww"
+    },
+    {
+      "Description": "The mountains, valleys and coastal waters of Sardinia are\nteeming with wildlife, including a surprising number of rare\nspecies.",
+      "Name": "Hike to Montblank",
+      "URL": "urrrdd2dd"
+    }
+  ],
+  "SubImages": [
+    {
+      "Description": "Encounter herds of stocky wild horses and vivid flocks\nof pink flamingos as you explore the varied habitats of this\nnatural wonderland.",
+      "Name": "Flamingos",
+      "URL": "https://hikes-trailfinder-website-images.s3.us-east-1.amazonaws.com/Trip-01/subImages/image2.webp"
+    }
+  ],
+  "Transportation": "There’s no shortage of spectacular scenery on the coast, but the dazzling\nPiscinas Dunes are in a league all of their own.",
+  "TripEndDate": "25-07-2024",
+  "TripStartDate": "18-07-2024",
+  "UniqueGoogleMapURL": "sdfsdfsdfsdf",
+  "UniqueReportURL": "sdfsdfsdfsdf",
+  "UniqueTripID": "Trip-01"
+}

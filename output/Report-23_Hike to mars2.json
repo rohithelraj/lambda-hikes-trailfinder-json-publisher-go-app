@@ -1,0 +1,19 @@
+{
+  "Description": "Hooligans are running around",
+  "EntryType": "Report",
+  "GoogleMapURL": "ewrwfsdf",
+  "MainImagePath": "https://hikes-trailfinder-website-images.s3.us-east-1.amazonaws.com/Report-23/main.webp",
+  "RelatedEventURL": "tthhh",
+  "RelatedTripURL": "dfer",
+  "ReportDate": "15-10-2024",
+  "ReportName": "Hike to mars2",
+  "ReportType": "Trip",
+  "SubImages": [
+    {
+      "Description": "no country for old men",
+      "Name": "Sub Image URL:",
+      "URL": "https://hikes-trailfinder-website-images.s3.us-east-1.amazonaws.com/Report-23/subImages/image2.webp"
+    }
+  ],
+  "UniqueReportID": "Report-23"
+}

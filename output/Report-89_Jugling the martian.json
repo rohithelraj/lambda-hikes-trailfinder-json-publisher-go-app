@@ -1,0 +1,24 @@
+{
+  "Description": "the great ordeal it was, longing for the natural wonders",
+  "EntryType": "Report",
+  "GoogleMapURL": "443dfsdf",
+  "MainImagePath": "https://hikes-trailfinder-website-images.s3.us-east-1.amazonaws.com/Report-89/main.webp",
+  "RelatedEventURL": "werweds11",
+  "RelatedTripURL": "neline21",
+  "ReportDate": "18-09-2024",
+  "ReportName": "Jugling the martian",
+  "ReportType": "Event",
+  "SubImages": [
+    {
+      "Description": "Gandalrf riding Shadowfax",
+      "Name": "Gandalf",
+      "URL": "https://hikes-trailfinder-website-images.s3.us-east-1.amazonaws.com/Report-89/subImages/image2.webp"
+    },
+    {
+      "Description": "Saruman going to paleoladi",
+      "Name": "Saruman",
+      "URL": "https://hikes-trailfinder-website-images.s3.us-east-1.amazonaws.com/Report-89/subImages/image3.webp"
+    }
+  ],
+  "UniqueReportID": "Report-89"
+}
