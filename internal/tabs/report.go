@@ -17,7 +17,9 @@ import (
 
 func NewReportTab(window fyne.Window) *container.TabItem {
 	// Input fields
-	entryType := widget.NewSelect([]string{"Event", "Trip", "Report"}, nil)
+	entryType := widget.NewEntry()
+	entryType.SetText("Report")
+	entryType.Disable()
 	reportDate := widget.NewEntry()
 	reportType := widget.NewSelect([]string{"Event", "Trip"}, nil)
 	reportName := widget.NewEntry()
@@ -88,14 +90,14 @@ func NewReportTab(window fyne.Window) *container.TabItem {
 	// Publish button logic
 	publishButton := widget.NewButton("Publish", func() {
 		// Validate required fields
-		if entryType.Selected == "" || reportDate.Text == "" || reportType.Selected == "" || reportName.Text == "" || uniqueReportID.Text == "" {
+		if reportDate.Text == "" || reportType.Selected == "" || reportName.Text == "" || uniqueReportID.Text == "" {
 			dialog.ShowError(fmt.Errorf("Please fill all required fields"), window)
 			return
 		}
 
 		// Collect data into a JSON object
 		reportData := map[string]interface{}{
-			"EntryType":       entryType.Selected,
+			"EntryType":       entryType.Text,
 			"ReportDate":      reportDate.Text,
 			"ReportType":      reportType.Selected,
 			"ReportName":      reportName.Text,
