@@ -27,7 +27,7 @@ func NewTripTab(window fyne.Window) *container.TabItem {
 	entryType := widget.NewEntry()
 	entryType.SetText("Trip")
 	entryType.Disable()
-
+	tripName := widget.NewEntry()
 	tripStartDate := widget.NewEntry()
 	tripEndDate := widget.NewEntry()
 	uniqueTripID := widget.NewEntry()
@@ -209,9 +209,15 @@ func NewTripTab(window fyne.Window) *container.TabItem {
 	}
 
 	publishButton := widget.NewButton("Publish", func() {
+		// Validate required fields
+		if tripName.Text == "" || tripStartDate.Text == "" || tripEndDate.Text == "" || uniqueTripID.Text == "" || descriptionEntry.Text == "" || transportationEntry.Text == "" || accommodationEntry.Text == "" {
+			dialog.ShowError(fmt.Errorf("Please fill all required fields"), window)
+			return
+		}
 		tripData := map[string]interface{}{
 			"CreationDate":       creationDate.Text,
 			"EntryType":          entryType.Text,
+			"TripName":           tripName.Text,
 			"TripStartDate":      tripStartDate.Text,
 			"TripEndDate":        tripEndDate.Text,
 			"UniqueTripID":       uniqueTripID.Text,
@@ -253,19 +259,20 @@ func NewTripTab(window fyne.Window) *container.TabItem {
 	})
 
 	content := container.NewVBox(
-		widget.NewLabel("Creation Date:"), creationDate,
-		widget.NewLabel("Entry Type:"), entryType,
-		widget.NewLabel("Trip Start Date:"), tripStartDate,
-		widget.NewLabel("Trip End Date:"), tripEndDate,
-		widget.NewLabel("Unique Trip ID:"), uniqueTripID,
+		widget.NewLabel("Creation Date*:"), creationDate,
+		widget.NewLabel("Entry Type*:"), entryType,
+		widget.NewLabel("Trip Name*:"), tripName,
+		widget.NewLabel("Trip Start Date*:"), tripStartDate,
+		widget.NewLabel("Trip End Date*:"), tripEndDate,
+		widget.NewLabel("Unique Trip ID*:"), uniqueTripID,
 		widget.NewLabel("Unique Google Map URL:"), uniqueGoogleMapURL,
 		widget.NewLabel("Unique Report URL:"), uniqueReportURL,
 		widget.NewLabel("Main Image:"), container.NewHBox(mainImagePath, mainImageUploadButton),
-		widget.NewLabel("Description:"), container.NewBorder(descriptionToolbar, nil, nil, nil, container.NewVBox(descriptionEntry, description)),
+		widget.NewLabel("Description*:"), container.NewBorder(descriptionToolbar, nil, nil, nil, container.NewVBox(descriptionEntry, description)),
 		widget.NewLabel("Costs:"), container.NewBorder(costsToolbar, nil, nil, nil, container.NewVBox(costsEntry, costs)),
-		widget.NewLabel("Transportation:"), container.NewBorder(transportationToolbar, nil, nil, nil, container.NewVBox(transportationEntry, transportation)),
+		widget.NewLabel("Transportation*:"), container.NewBorder(transportationToolbar, nil, nil, nil, container.NewVBox(transportationEntry, transportation)),
 		widget.NewLabel("Equipment:"), container.NewBorder(equipmentToolbar, nil, nil, nil, container.NewVBox(equipmentEntry, equipment)),
-		widget.NewLabel("Accommodation:"), container.NewBorder(accommodationToolbar, nil, nil, nil, container.NewVBox(accommodationEntry, accommodation)),
+		widget.NewLabel("Accommodation*:"), container.NewBorder(accommodationToolbar, nil, nil, nil, container.NewVBox(accommodationEntry, accommodation)),
 		widget.NewLabel("Related Events:"), relatedEventsContainer, addEventButton,
 		widget.NewLabel("Sub Images:"), subImageContainer, addSubImageButton,
 		layout.NewSpacer(),

@@ -28,7 +28,7 @@ func NewEventTab(window fyne.Window) *container.TabItem {
 	entryType := widget.NewEntry()
 	entryType.SetText("Event")
 	entryType.Disable()
-
+	eventName := widget.NewEntry()
 	eventDate := widget.NewEntry()
 	relatedTripURL := widget.NewEntry()
 	uniqueEventID := widget.NewEntry()
@@ -169,7 +169,7 @@ func NewEventTab(window fyne.Window) *container.TabItem {
 	// Publish button
 	publishButton := widget.NewButton("Publish", func() {
 		// Validate required fields
-		if eventDate.Text == "" || uniqueEventID.Text == "" || uniqueKomootURL.Text == "" || descriptionEntry.Text == "" || transportationEntry.Text == "" {
+		if eventName.Text == "" || eventDate.Text == "" || uniqueEventID.Text == "" || uniqueKomootURL.Text == "" || descriptionEntry.Text == "" || transportationEntry.Text == "" {
 			dialog.ShowError(fmt.Errorf("Please fill all required fields"), window)
 			return
 		}
@@ -177,6 +177,7 @@ func NewEventTab(window fyne.Window) *container.TabItem {
 		eventData := map[string]interface{}{
 			"CreationDate":    creationDate.Text,
 			"EntryType":       entryType.Text,
+			"EventName":       eventName.Text,
 			"EventDate":       eventDate.Text,
 			"RelatedTripURL":  relatedTripURL.Text,
 			"UniqueEventID":   uniqueEventID.Text,
@@ -219,6 +220,7 @@ func NewEventTab(window fyne.Window) *container.TabItem {
 	content := container.NewVBox(
 		widget.NewLabel("Creation Date*:"), creationDate,
 		widget.NewLabel("Entry Type*:"), entryType,
+		widget.NewLabel("Event Name*:"), eventName,
 		widget.NewLabel("Event Date*:"), eventDate,
 		widget.NewLabel("Related Trip URL:"), relatedTripURL,
 		widget.NewLabel("Unique Event ID*:"), uniqueEventID,
