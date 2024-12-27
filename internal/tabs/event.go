@@ -39,8 +39,14 @@ func NewEventTab(window fyne.Window) *container.TabItem {
 	// Rich text fields with toolbar
 	createRichTextArea := func(label string) (*widget.RichText, *widget.Entry, *widget.Toolbar) {
 		richText := widget.NewRichText()
+		// Set a fixed height for the rich text display
+		richText.Resize(fyne.NewSize(0, 150))
+		richText.Wrapping = fyne.TextWrapWord
 		binding := binding.NewString()
 		entry := widget.NewMultiLineEntry()
+		entry.Wrapping = fyne.TextWrapWord
+		// Set a fixed height for the entry
+		entry.Resize(fyne.NewSize(0, 100))
 		entry.OnChanged = func(text string) {
 			richText.ParseMarkdown(text)
 			binding.Set(text)

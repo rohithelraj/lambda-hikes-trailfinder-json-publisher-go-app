@@ -35,8 +35,13 @@ func NewReportTab(window fyne.Window) *container.TabItem {
 
 	// Rich text description
 	description := widget.NewRichText()
+	description.Resize(fyne.NewSize(0, 150))
+	description.Wrapping = fyne.TextWrapWord
+
 	descriptionBinding := binding.NewString()
 	descriptionEntry := widget.NewMultiLineEntry()
+	descriptionEntry.Wrapping = fyne.TextWrapWord
+	descriptionEntry.Resize(fyne.NewSize(0, 100))
 	descriptionEntry.OnChanged = func(text string) {
 		description.ParseMarkdown(text)
 		descriptionBinding.Set(text)
@@ -87,6 +92,7 @@ func NewReportTab(window fyne.Window) *container.TabItem {
 		subImageName := widget.NewEntry()
 		subImageDescription := widget.NewMultiLineEntry()
 		subImageDescription.Wrapping = fyne.TextWrapWord
+		subImageDescription.Resize(fyne.NewSize(0, 100))
 		subImageUploadButton := widget.NewButton("Upload Sub Image", func() {
 			dialog.ShowFileOpen(func(reader fyne.URIReadCloser, err error) {
 				if err != nil || reader == nil {
