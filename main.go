@@ -1,7 +1,7 @@
 package main
 
 import (
-	"lambda-hikes-trailfinder-json-publisher-go-app/internal/tabs" // adjust this import path based on your module name
+	"lambda-hikes-trailfinder-json-publisher-go-app/internal/tabs"
 
 	"fyne.io/fyne/v2"
 	"fyne.io/fyne/v2/app"
@@ -10,10 +10,11 @@ import (
 
 func main() {
 	myApp := app.New()
-	myWindow := myApp.NewWindow("Report Tab Example")
+	myWindow := myApp.NewWindow("Event and Report Publisher")
 
 	reportTab := tabs.NewReportTab(myWindow)
-	tabs := container.NewAppTabs(reportTab)
+	eventTab := tabs.NewEventTab(myWindow)
+	tabs := container.NewAppTabs(reportTab, eventTab)
 
 	myWindow.SetContent(tabs)
 	myWindow.Resize(fyne.NewSize(600, 800))

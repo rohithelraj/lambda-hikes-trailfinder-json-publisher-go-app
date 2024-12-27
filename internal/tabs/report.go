@@ -144,9 +144,9 @@ func NewReportTab(window fyne.Window) *container.TabItem {
 			return
 		}
 
-		outputFolder := "output"
+		outputFolder := "output/reports"
 		if _, err := os.Stat(outputFolder); os.IsNotExist(err) {
-			err = os.Mkdir(outputFolder, os.ModePerm)
+			err = os.MkdirAll(outputFolder, os.ModePerm)
 			if err != nil {
 				dialog.ShowError(fmt.Errorf("Failed to create output folder: %v", err), window)
 				return
