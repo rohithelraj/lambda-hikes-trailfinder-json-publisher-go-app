@@ -14,7 +14,8 @@ func main() {
 
 	reportTab := tabs.NewReportTab(myWindow)
 	eventTab := tabs.NewEventTab(myWindow)
-	tabs := container.NewAppTabs(reportTab, eventTab)
+	tripTab := tabs.NewTripTab(myWindow)
+	tabs := container.NewAppTabs(reportTab, eventTab, tripTab)
 
 	myWindow.SetContent(tabs)
 	myWindow.Resize(fyne.NewSize(600, 800))
